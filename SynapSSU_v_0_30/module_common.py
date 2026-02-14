@@ -75,14 +75,16 @@ class CreateClass_Super:
         self.main.LiveBox.set_values(['- V',' - A', '- V', '- A'])
         self.measurement_done_flag = False
         
-        self.main.DataSettingsBox.save_recording(self.result_data)
-                
-        outputpath_jpg = '%s%s%s%s' %(self.main.DataSettingsBox.root.dirName, '/', self.main.DataSettingsBox.newfilename, '.jpg')
+        actual_file_name = self.main.DataSettingsBox.save_recording(self.result_data)
+        folder = self.main.DataSettingsBox.le_location.text()
+        outputpath_jpg = os.path.join(folder, f"{actual_filename}.jpg")
+
+        # outputpath_jpg = '%s%s%s%s' %(self.main.DataSettingsBox.root.dirName, '/', self.main.DataSettingsBox.newfilename, '.jpg')
         screen = QApplication.primaryScreen()
         screenshot = screen.grabWindow(self.main.winId())
         screenshot.save(outputpath_jpg, 'jpg')
-        self.main.LogBox.update_log("Data saved to: %s%s%s%s" %(self.main.DataSettingsBox.root.dirName, '/', self.main.DataSettingsBox.newfilename, '.dat'))
-        
+        # self.main.LogBox.update_log("Data saved to: %s%s%s%s" %(self.main.DataSettingsBox.root.dirName, '/', self.main.DataSettingsBox.newfilename, '.dat'))
+        self.main.LogBox.update_log(f"Data saved to: {folder}/{actual_filename}.dat")
         self.enable_tab_all()
 
     def abort_measurement(self):

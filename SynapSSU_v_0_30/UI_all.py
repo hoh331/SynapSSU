@@ -745,9 +745,13 @@ class CreateDataSettingsBox:
     def save_recording(self, data):
         folder = self.le_location.text()
         filename = self.le_filename.text()
+        os.makedirs(folder, exist_ok=True) #create the folde if not exist
+
         newfilename = self.file_name_check(folder, filename)
         outputpath = os.path.join(folder, f"{newfilename}.dat")
         np.savetxt(outputpath, data, fmt='%.6E', delimiter=',', newline='\n')
+
+        return filename
 
     def get_save_path_only(self, extension = 'npz'):
         folder = self.le_location.text()
