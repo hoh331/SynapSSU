@@ -207,53 +207,67 @@ class IO_Thread(IO_Thread_Super):
                     print("Time seg 01: Current: after read delay")
                     if self.read_bias_off == 1:
                         self.SMU_DRAIN.write(":SOUR:VOLT:LEV ", str(0))
-                        self.SMU_GATE.write(":SOUR:VOLT:LEV ", str(0))
+                        if self.SMU_GATE is not None:
+                            self.SMU_GATE.write(":SOUR:VOLT:LEV ", str(0))                    
                         if self.is_SMU_EXT_used:
                             self.SMU_EXT.write(":SOUR:VOLT:LEV ", str(0))
                             self.SMU_EXT.query_ascii_values(":READ?") 
                         self.SMU_DRAIN.query_ascii_values(":READ?")
-                        self.SMU_GATE.query_ascii_values(":READ?")                        
+                        if self.SMU_GATE is not None:
+                            self.SMU_GATE.query_ascii_values(":READ?")                        
                     else:
                         self.SMU_DRAIN.write(":SOUR:VOLT:LEV ", str(self.vds))
-                        self.SMU_GATE.write(":SOUR:VOLT:LEV ", str(self.vgs))
+                        if self.SMU_GATE is not None:
+                            self.SMU_GATE.write(":SOUR:VOLT:LEV ", str(0))    
                         if self.is_SMU_EXT_used:
                             self.SMU_EXT.write(":SOUR:VOLT:LEV ", str(self.ext))
                             self.SMU_EXT.query_ascii_values(":READ?") 
                         self.SMU_DRAIN.query_ascii_values(":READ?")
-                        self.SMU_GATE.query_ascii_values(":READ?")
+                        if self.SMU_GATE is not None:
+                            self.SMU_GATE.query_ascii_values(":READ?")      
                 elif flag_status == 2:
                     print("Time seg 02: Apply pulse")
                     self.SMU_DRAIN.write(":SOUR:VOLT:LEV ", str(self.vdsamp))
-                    self.SMU_GATE.write(":SOUR:VOLT:LEV ", str(self.vgsamp))
+                    if self.SMU_GATE is not None:
+                        self.SMU_GATE.write(":SOUR:VOLT:LEV ", str(self.vgsamp))
                     if self.is_SMU_EXT_used:
                         self.SMU_EXT.write(":SOUR:VOLT:LEV ", str(self.extamp))
                         self.SMU_EXT.query_ascii_values(":READ?") 
-                    print((self.SMU_GATE.query_ascii_values(":READ?")))
+                    if self.SMU_GATE is not None:
+                        print((self.SMU_GATE.query_ascii_values(":READ?")))
                     print((self.SMU_DRAIN.query_ascii_values(":READ?"))) 
                 elif flag_status == 3:
                     print("Time seg 03: Turn off pulse")
                     if self.read_bias_off == 1:
                         self.SMU_DRAIN.write(":SOUR:VOLT:LEV ", str(0))
-                        self.SMU_GATE.write(":SOUR:VOLT:LEV ", str(0))
+                        if self.SMU_GATE is not None:
+                            self.SMU_GATE.write(":SOUR:VOLT:LEV ", str(0))
                         if self.is_SMU_EXT_used:
                             self.SMU_EXT.write(":SOUR:VOLT:LEV ", str(0))
                             self.SMU_EXT.query_ascii_values(":READ?") 
-                        self.SMU_GATE.query_ascii_values(":READ?")
+                        if self.SMU_GATE is not None:
+                            self.SMU_GATE.query_ascii_values(":READ?")
                         self.SMU_DRAIN.query_ascii_values(":READ?")                        
                     else:
                         self.SMU_DRAIN.write(":SOUR:VOLT:LEV ", str(self.vds))
-                        self.SMU_GATE.write(":SOUR:VOLT:LEV ", str(self.vgs))
+                        if self.SMU_GATE is not None:
+                            self.SMU_GATE.write(":SOUR:VOLT:LEV ", str(self.vgs))
                         if self.is_SMU_EXT_used:
                             self.SMU_EXT.write(":SOUR:VOLT:LEV ", str(self.ext))
                             self.SMU_EXT.query_ascii_values(":READ?") 
-                        self.SMU_GATE.query_ascii_values(":READ?")
+                        if self.SMU_GATE is not None:
+                            self.SMU_GATE.query_ascii_values(":READ?")
                         self.SMU_DRAIN.query_ascii_values(":READ?")
                 else:
                     print("Time seg 04: read")
                     self.SMU_DRAIN.write(":SOUR:VOLT:LEV ", str(self.vds))
-                    self.SMU_GATE.write(":SOUR:VOLT:LEV ", str(self.vgs))
+                    if self.SMU_GATE is not None:
+                        self.SMU_GATE.write(":SOUR:VOLT:LEV ", str(self.vgs))
                     CURRENT_DRAIN = (self.SMU_DRAIN.query_ascii_values(":READ?"))
-                    CURRENT_GATE = (self.SMU_GATE.query_ascii_values(":READ?"))
+                    if self.SMU_GATE is not None:
+                        CURRENT_GATE = (self.SMU_GATE.query_ascii_values(":READ?"))
+                    else:
+                        CURRENT_GATE = 0.0
                     print(CURRENT_GATE)
                     print(CURRENT_DRAIN)
                     temp = np.array([self.cycle_count_abs, CURRENT_DRAIN[0], CURRENT_DRAIN[1], CURRENT_GATE[0], CURRENT_GATE[1]])
@@ -347,8 +361,9 @@ class IO_Thread(IO_Thread_Super):
         self.time_step = int(self.time_step)
         self.signal.emit(new_curve)
         
-        self.SMU_GATE.write(":SOUR:VOLT:LEV ", str(self.vgs))
-        self.SMU_GATE.write(":OUTP ON")
+        if self.SMU_GATE is not None:
+            self.SMU_GATE.write(":SOUR:VOLT:LEV ", str(self.vgs))
+            self.SMU_GATE.write(":OUTP ON")
         
         self.SMU_DRAIN.write(":SOUR:VOLT:LEV ", str(self.vds))
         self.SMU_DRAIN.write(":OUTP ON")        

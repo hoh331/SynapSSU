@@ -157,7 +157,8 @@ class IO_Thread(IO_Thread_Super):
                     self.flag = 0
                 else:
                     if self.is_pulse_rightnow(CURRENT_TIME, self.pulse_time_list, self.pulse_width):
-                        if self.pulse_target == 0: # Pulse to gate                       
+                        if self.pulse_target == 0: # Pulse to gate       
+                            print(f'pulse_target = {self.pulse_target}')               
                             self.SMU_GATE.write(":SOUR:VOLT:LEV ", str(vgsamp))
                             self.SMU_GATE.write(":OUTP ON")
                             CURRENT_GATE = (self.SMU_GATE.query_ascii_values(":READ?"))[1]
@@ -166,17 +167,25 @@ class IO_Thread(IO_Thread_Super):
                             self.signal.emit(temp)
                         
                         elif self.pulse_target == 1: # Pulse to drain
+                            print(f'pulse_target = {self.pulse_target}')
                             self.SMU_DRAIN.write(":SOUR:VOLT:LEV ", str(vdsamp))
                             self.SMU_DRAIN.write(":OUTP ON")
-                            CURRENT_GATE = (self.SMU_GATE.query_ascii_values(":READ?"))[1]
+                            if self.SMU_GATE is not None:
+                                CURRENT_GATE = (self.SMU_GATE.query_ascii_values(":READ?"))[1]
+                            else:
+                                CURRENT_GATE = 0.0
                             CURRENT_DRAIN = (self.SMU_DRAIN.query_ascii_values(":READ?"))[1] 
                             temp = np.array([CURRENT_TIME, vdsamp, CURRENT_DRAIN, vgs, CURRENT_GATE])
                             self.signal.emit(temp)
                             
                         else: # Pulse from external source
+                            print(f'pulse_target = {self.pulse_target}')
                             self.SMU_EXT.write(":SOUR:VOLT:LEV ", str(extamp))
                             self.SMU_EXT.write(":OUTP ON")
-                            CURRENT_GATE = (self.SMU_GATE.query_ascii_values(":READ?"))[1]
+                            if self.SMU_GATE is not None:
+                                CURRENT_GATE = (self.SMU_GATE.query_ascii_values(":READ?"))[1]
+                            else:
+                                CURRENT_GATE = 0.0
                             CURRENT_DRAIN = (self.SMU_DRAIN.query_ascii_values(":READ?"))[1]
                             CURRENT_EXT = (self.SMU_EXT.query_ascii_values(":READ?"))[1]
                             temp = np.array([CURRENT_TIME, vds, CURRENT_DRAIN, vgs, CURRENT_GATE, extamp, CURRENT_EXT])
@@ -184,6 +193,7 @@ class IO_Thread(IO_Thread_Super):
 
                     else:
                         if self.pulse_target == 0: # Pulse to gate 
+                            print(f'pulse_target = {self.pulse_target}')
                             self.SMU_GATE.write(":SOUR:VOLT:LEV ", str(vgs))
                             self.SMU_GATE.write(":OUTP ON")
                             CURRENT_GATE = (self.SMU_GATE.query_ascii_values(":READ?"))[1]
@@ -192,17 +202,25 @@ class IO_Thread(IO_Thread_Super):
                             self.signal.emit(temp)  
                         
                         elif self.pulse_target == 1: # Pulse to drain
+                            print(f'pulse_target = {self.pulse_target}')
                             self.SMU_DRAIN.write(":SOUR:VOLT:LEV ", str(vds))
                             self.SMU_DRAIN.write(":OUTP ON")
-                            CURRENT_GATE = (self.SMU_GATE.query_ascii_values(":READ?"))[1]
+                            if self.SMU_GATE is not None:
+                                CURRENT_GATE = (self.SMU_GATE.query_ascii_values(":READ?"))[1]
+                            else:
+                                CURRENT_GATE = 0.0
                             CURRENT_DRAIN = (self.SMU_DRAIN.query_ascii_values(":READ?"))[1] 
                             temp = np.array([CURRENT_TIME, vds, CURRENT_DRAIN, vgs, CURRENT_GATE])
                             self.signal.emit(temp)
                             
                         else: # Pulse from external source
+                            print(f'pulse_target = {self.pulse_target}')
                             self.SMU_EXT.write(":SOUR:VOLT:LEV ", str(ext))
                             self.SMU_EXT.write(":OUTP ON")
-                            CURRENT_GATE = (self.SMU_GATE.query_ascii_values(":READ?"))[1]
+                            if self.SMU_GATE is not None:
+                                CURRENT_GATE = (self.SMU_GATE.query_ascii_values(":READ?"))[1]
+                            else:
+                                CURRENT_GATE = 0.0
                             CURRENT_DRAIN = (self.SMU_DRAIN.query_ascii_values(":READ?"))[1] 
                             CURRENT_EXT = (self.SMU_EXT.query_ascii_values(":READ?"))[1]
                             temp = np.array([CURRENT_TIME, vds, CURRENT_DRAIN, vgs, CURRENT_GATE, ext, CURRENT_EXT])
@@ -249,8 +267,9 @@ class IO_Thread(IO_Thread_Super):
         self.time_step = int(self.time_step)
         self.signal.emit(new_curve)
         
-        self.SMU_GATE.write(":SOUR:VOLT:LEV ", str(vgs))
-        self.SMU_GATE.write(":OUTP ON")
+        if self.SMU_GATE is not None:
+            self.SMU_GATE.write(":SOUR:VOLT:LEV ", str(vgs))
+            self.SMU_GATE.write(":OUTP ON")
         
         self.SMU_DRAIN.write(":SOUR:VOLT:LEV ", str(vds))
         self.SMU_DRAIN.write(":OUTP ON")        

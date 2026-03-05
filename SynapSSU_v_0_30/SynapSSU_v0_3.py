@@ -65,7 +65,7 @@ class App(QWidget):
         #Grid layout setup
         grid = QGridLayout()
         self.setLayout(grid)
-        self.setWindowTitle('SynapSSU v0.11')
+        self.setWindowTitle('SynapSSU v0.3')
         window_ico = resource_path('icon.ico')
         self.setWindowIcon(QIcon(window_ico))
         self.rm = visa.ResourceManager()
