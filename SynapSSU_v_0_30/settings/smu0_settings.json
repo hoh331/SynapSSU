@@ -1,0 +1,10 @@
+{
+    "in_use": true,
+    "autozero": "Yes",
+    "nplc": "1",
+    "vsourrang": "AUTO",
+    "isensrang": "AUTO ON",
+    "iprotrang": "100E-3",
+    "trg_delay": "0.0",
+    "sour_delay": "0.0"
+}
