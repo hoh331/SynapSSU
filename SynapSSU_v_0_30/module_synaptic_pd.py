@@ -267,7 +267,7 @@ class IO_Thread(IO_Thread_Super):
                     if self.SMU_GATE is not None:
                         CURRENT_GATE = (self.SMU_GATE.query_ascii_values(":READ?"))
                     else:
-                        CURRENT_GATE = 0.0
+                        CURRENT_GATE = np.zeros(5)
                     print(CURRENT_GATE)
                     print(CURRENT_DRAIN)
                     temp = np.array([self.cycle_count_abs, CURRENT_DRAIN[0], CURRENT_DRAIN[1], CURRENT_GATE[0], CURRENT_GATE[1]])
