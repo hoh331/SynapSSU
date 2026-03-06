@@ -26,8 +26,10 @@ OPERATIONAL WORKFLOW
 6. Data Saving: Results are automatically exported as .csv files and screenshot images.
 
 LICENSE
+
 SynapSSU is released under the MIT License.
 
 CONTACT
-Corresponding Author: Hongseok Oh, Department of Physics, Soongsil University.
+
+Hongseok Oh, Department of Physics, Soongsil University.
 Email: hoh@ssu.ac.kr 
