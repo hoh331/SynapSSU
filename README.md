@@ -3,9 +3,11 @@ SYNAPSSU: AN OPEN-SOURCE PYTHON SOFTWARE FOR SYNCHRONIZED AND PRECISION TIMING-C
 SynapSSU is a specialized software tool designed for the characterization of artificial synaptic devices, which are essential for developing energy-efficient neuromorphic computing systems. The software allows for the control of multiple source-meter units (SMUs) to apply synchronized electrical or optical pulses and record the resulting device responses.
 
 CORE FEATURES
+
 The software supports the measurement of critical synaptic characteristics, including Excitatory Post-Synaptic Current (EPSC), Paired-Pulse Facilitation (PPF), and Long-Term Potentiation/Depression (PD). It is compatible with various device architectures, such as two-terminal memristors, three-terminal synaptic transistors, and optoelectronic synaptic devices that require external light stimulation. SynapSSU features an intuitive graphical user interface (GUI) for parameter tuning and real-time visualization.
 
 HARDWARE AND SOFTWARE REQUIREMENTS
+
 Hardware:
 SMU instruments must be compatible with Keithley 2400 or 2450 series command sets.
 Instruments must be connected to a PC via a GPIB interface or USB-GPIB converter supported by a driver such as NI-VISA.
