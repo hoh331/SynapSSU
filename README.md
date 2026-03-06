@@ -1,4 +1,5 @@
 SYNAPSSU: AN OPEN-SOURCE PYTHON SOFTWARE FOR SYNCHRONIZED AND PRECISION TIMING-CONTROLLED SYNAPTIC DEVICE CHARACTERIZATION 
+
 SynapSSU is a specialized software tool designed for the characterization of artificial synaptic devices, which are essential for developing energy-efficient neuromorphic computing systems. The software allows for the control of multiple source-meter units (SMUs) to apply synchronized electrical or optical pulses and record the resulting device responses.
 
 CORE FEATURES
