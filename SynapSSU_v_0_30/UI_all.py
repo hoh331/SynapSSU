@@ -23,9 +23,6 @@ import json
 sizePolicy = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Preferred)
 
 
-# For dialog
-import tkinter as tk # for the dialog of opening file
-from tkinter import filedialog # for the dialog of opening file
 import os
 from datetime import datetime
 

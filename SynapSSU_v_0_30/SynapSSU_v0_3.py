@@ -51,8 +51,23 @@ def resource_path(relative_path):
     base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
     return os.path.join(base_path, relative_path)
 
+def _is_frozen():
+    """True when running as a compiled (Nuitka/PyInstaller) executable."""
+    if getattr(sys, 'frozen', False):
+        return True
+    main_mod = sys.modules.get('__main__', None)
+    return main_mod is not None and hasattr(main_mod, '__compiled__')
+
 def get_settings_path(filename):
-    base_path = os.path.dirname(os.path.abspath(__file__))
+    """Path for persistent settings. When frozen, store next to the
+    user-facing .exe: Nuitka onefile sets NUITKA_ONEFILE_BINARY to the
+    real exe path (sys.executable / __file__ point into the temp unpack
+    folder, which is wiped on exit)."""
+    if _is_frozen():
+        exe = os.environ.get('NUITKA_ONEFILE_BINARY') or sys.argv[0]
+        base_path = os.path.dirname(os.path.abspath(exe))
+    else:
+        base_path = os.path.dirname(os.path.abspath(__file__))
     settings_dir = os.path.join(base_path, 'settings')
     os.makedirs(settings_dir, exist_ok=True)
     return os.path.join(settings_dir, filename)
@@ -65,7 +80,7 @@ class App(QWidget):
         #Grid layout setup
         grid = QGridLayout()
         self.setLayout(grid)
-        self.setWindowTitle('SynapSSU v0.3')
+        self.setWindowTitle('SynapSSU v0.3.1')
         window_ico = resource_path('icon.ico')
         self.setWindowIcon(QIcon(window_ico))
         self.rm = visa.ResourceManager()
@@ -86,8 +101,8 @@ class App(QWidget):
         value_list = ["- V", "- A", "- V", "- A", "- V", "- A"]
         self.LiveBox.set_values(value_list)
         self.LiveBox.set_status_idle() 
-        self.SWInfoBox = ui.CreateSWInfoBox(sw_text = "SynapSSU (v0.3 Nov 2025)",
-                                            date_text = "v0.3 November 2025",
+        self.SWInfoBox = ui.CreateSWInfoBox(sw_text = "SynapSSU (v0.3.1 Jun 2026)",
+                                            date_text = "v0.3.1 June 2026",
                                             name_text = "Created by Prof. Hongseok Oh",
                                             aff_text = "Department of Physics, Soongsil University (SSU), South Korea",
                                             contact_text = "Email: hoh@ssu.ac.kr")

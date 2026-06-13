@@ -1,0 +1,6 @@
+# Build artifacts
+SynapSSU_v_0_30/build_output/
+
+# Python caches
+__pycache__/
+*.pyc

@@ -1,0 +1,8 @@
+# SynapSSU v0.3.1 — Python 3.9+
+# Runtime instrument communication additionally requires a native VISA backend
+# (e.g. NI-VISA) installed separately on the host PC.
+PyQt5>=5.15
+pyqtgraph>=0.12
+numpy>=1.21
+PyVISA>=1.11
+PyVISA-py>=0.5
