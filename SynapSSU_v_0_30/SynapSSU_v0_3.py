@@ -80,7 +80,7 @@ class App(QWidget):
         #Grid layout setup
         grid = QGridLayout()
         self.setLayout(grid)
-        self.setWindowTitle('SynapSSU v0.3.1')
+        self.setWindowTitle('SynapSSU v0.3.2')
         window_ico = resource_path('icon.ico')
         self.setWindowIcon(QIcon(window_ico))
         self.rm = visa.ResourceManager()
@@ -101,8 +101,8 @@ class App(QWidget):
         value_list = ["- V", "- A", "- V", "- A", "- V", "- A"]
         self.LiveBox.set_values(value_list)
         self.LiveBox.set_status_idle() 
-        self.SWInfoBox = ui.CreateSWInfoBox(sw_text = "SynapSSU (v0.3.1 Jun 2026)",
-                                            date_text = "v0.3.1 June 2026",
+        self.SWInfoBox = ui.CreateSWInfoBox(sw_text = "SynapSSU (v0.3.2 Jun 2026)",
+                                            date_text = "v0.3.2 June 2026",
                                             name_text = "Created by Prof. Hongseok Oh",
                                             aff_text = "Department of Physics, Soongsil University (SSU), South Korea",
                                             contact_text = "Email: hoh@ssu.ac.kr")

@@ -38,12 +38,12 @@ echo.
     --include-data-files=icon.ico=icon.ico ^
     --windows-icon-from-ico=icon.ico ^
     --product-name="SynapSSU" ^
-    --product-version=0.3.1.0 ^
-    --file-version=0.3.1.0 ^
+    --product-version=0.3.2.0 ^
+    --file-version=0.3.2.0 ^
     --company-name="Soongsil University" ^
     --copyright="(C) 2026 Prof. Hongseok Oh" ^
     --assume-yes-for-downloads ^
-    --output-filename=SynapSSU_v0_3_1.exe ^
+    --output-filename=SynapSSU_v0_3_2.exe ^
     --output-dir=build_output ^
     SynapSSU_v0_3.py
 
@@ -59,6 +59,6 @@ echo ======================================================================
 echo  BUILD SUCCESS
 echo  Distribute this whole folder:
 echo    %~dp0build_output\SynapSSU_v0_3.dist\
-echo  (run SynapSSU_v0_3_1.exe inside it)
+echo  (run SynapSSU_v0_3_2.exe inside it)
 echo ======================================================================
 endlocal
