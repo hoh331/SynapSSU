@@ -37,10 +37,10 @@ PyQt5, pyqtgraph, NumPy, PyVISA, and PyVISA-py.
 **RUNNING THE SOFTWARE**
 
 From the source directory:
-`cd SynapSSU_v_0_30`
+`cd SynapSSU_v_0_32`
 `python SynapSSU_v0_3.py`
 
-Instrument settings entered in the GUI are persisted to `SynapSSU_v_0_30/settings/*.json` and reloaded on the next launch.
+Instrument settings entered in the GUI are persisted to `SynapSSU_v_0_32/settings/*.json` and reloaded on the next launch.
 
 **BUILDING A STANDALONE EXECUTABLE (OPTIONAL)**
 
@@ -49,7 +49,7 @@ A Windows executable can be produced with Nuitka. Use a standard CPython environ
 `pip install nuitka`
 
 Then run the provided build script from the source directory:
-`cd SynapSSU_v_0_30`
+`cd SynapSSU_v_0_32`
 `build_synapssu.bat`
 
 The script builds in `--standalone` mode (not `--onefile`) so that the `settings` directory persists next to the executable. The resulting application is the entire `build\SynapSSU_v0_3.dist\` folder, which should be distributed together (e.g. as a .zip). The target PC still requires a native VISA backend (NI-VISA) to be installed.

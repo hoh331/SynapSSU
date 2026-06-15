@@ -23,9 +23,6 @@ import json
 sizePolicy = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Preferred)
 
 
-# For dialog
-import tkinter as tk # for the dialog of opening file
-from tkinter import filedialog # for the dialog of opening file
 import os
 from datetime import datetime
 
@@ -660,7 +657,7 @@ class CreateLiveValueBox(): # Execute the measurement
             self.lbl_title_list[i].setText(title_list[i])
             
     def set_values(self, value_list):
-        for i in range(self.num_values):
+        for i in range(min(self.num_values, len(value_list))):
             self.lbl_value_list[i].setText(value_list[i])
             
     def set_status_idle(self):
@@ -751,7 +748,7 @@ class CreateDataSettingsBox:
         outputpath = os.path.join(folder, f"{newfilename}.dat")
         np.savetxt(outputpath, data, fmt='%.6E', delimiter=',', newline='\n')
 
-        return filename
+        return newfilename
 
     def get_save_path_only(self, extension = 'npz'):
         folder = self.le_location.text()
