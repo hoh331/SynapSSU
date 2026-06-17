@@ -1,0 +1,10 @@
+Upload the Tektronix oscilloscope CSV exports (F00XXCH1.CSV, ...) into THIS folder.
+
+These should be the 50 ms experiment captures (programmed pulse width = 50 ms,
+inter-pulse gap = 50 ms, period = 100 ms), channel 1 = pulsing SMU output.
+
+Then run from the timing_analysis folder:
+    python analyze_pulses.py data
+
+Results are written to ../output/.
+You can delete this placeholder file.

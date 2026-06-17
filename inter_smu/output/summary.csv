@@ -1,0 +1,5 @@
+metric,mean,std_ddof1,N,sample_interval_ms
+SMU1_width_ms,99.9691,0.7859,25,1.0000
+SMU2_width_ms,99.7173,0.4788,20,1.0000
+combined_width_ms,99.8572,0.6722,45,1.0000
+offset_inter_SMU_ms,250.0015,0.8078,40,1.0000

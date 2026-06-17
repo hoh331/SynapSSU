@@ -1,0 +1,10 @@
+Upload the Tektronix oscilloscope CSV exports as CH1/CH2 pairs into THIS folder,
+e.g. F0030CH1.CSV (SMU1) and F0030CH2.CSV (SMU2) captured simultaneously.
+
+These should be the inter-SMU experiment (programmed pulse width = 100 ms per
+channel, programmed inter-pulse interval = 250 ms, staggered pattern).
+
+Then run from the inter_smu folder:
+    python analyze_inter_smu.py data
+
+Results are written to ../inter_smu/output/. You can delete this placeholder.
