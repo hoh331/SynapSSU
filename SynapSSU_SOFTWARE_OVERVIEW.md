@@ -1,6 +1,6 @@
 # SynapSSU — Software Overview (Technical Reference for Discussion)
 
-> Version: **v0.3.1** (June 2026). This document is a self-contained description of the
+> Version: **v0.3.2** (June 2026). This document is a self-contained description of the
 > SynapSSU software, written so that it can be discussed without access to the source
 > code. It covers purpose, architecture, acquisition/timing model, parameters, data
 > output, device protection, packaging, and known limitations. A short note on the
@@ -86,7 +86,7 @@ PyVISA + PyVISA-py (instrument I/O).
 ## 5. File / Module Structure
 
 ```
-SynapSSU_v_0_30/
+SynapSSU_v_0_32/
 ├─ SynapSSU_v0_3.py            # entry point: App(QWidget), tab host, settings paths
 ├─ module_common.py           # base classes: CreateClass_Super, IO_Thread_Super
 ├─ module_synaptic_epsc_ppf.py# EPSC/PPF mode (tab + worker)
@@ -251,5 +251,7 @@ The manuscript is under peer review. Reviewer requests fall into two groups:
   consistency, and English proofreading. These are addressable without re-measurement and
   are the subject of §10–§13 above plus the repository README and `requirements.txt`.
 
-A v0.3.1 patch (this version) fixed two crash bugs in the data-save routine, removed a
-dead Tk dependency, and made the settings path executable-aware for packaging.
+The v0.3.2 release (in `SynapSSU_v_0_32/`, with the original as-submitted v0.3.0 kept in
+`SynapSSU_v_0_30/`) fixed crash bugs in the data-save routine, a LiveValueBox index error
+that also blocked auto-save, removed a dead Tk dependency, and made the settings path
+executable-aware for packaging.

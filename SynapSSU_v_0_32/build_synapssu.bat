@@ -1,6 +1,6 @@
 @echo off
 REM ======================================================================
-REM  SynapSSU v0.3.1 - Nuitka standalone (folder) build (Windows + MSVC)
+REM  SynapSSU v0.3.2 - Nuitka standalone (folder) build (Windows + MSVC)
 REM  Uses the proven MeaSSUre IV v2 toolchain (.venv_nuitka + MSVC).
 REM
 REM  - --standalone (no --onefile): produces a build_output\SynapSSU_v0_3.dist
@@ -24,7 +24,7 @@ if not exist "%PYTHON%" (
     exit /b 1
 )
 
-echo Building SynapSSU v0.3.1 with Nuitka...
+echo Building SynapSSU v0.3.2 with Nuitka...
 echo Python: %PYTHON%
 echo.
 
